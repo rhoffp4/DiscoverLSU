@@ -2,12 +2,16 @@
 
 class EventProfile: 
     def __init__(self):
+        self.Name = str("")
         self.Date = int(0)
         self.Description = str("")
         self.Location = str("")
         self.Time = int(0)
         self.Attendence = str("")
 
+    def getName(self):
+        return self.Name
+    
     def getDate(self):
         return int(self.Date)
     
@@ -22,8 +26,10 @@ class EventProfile:
 
     def getAttendence(self):
         return str(self.Attendence)
-
-
+    
+    def setName(self,name):
+        self.name = name
+        
     def setDate(self,Date = 0):
         self.Date = Date
 
