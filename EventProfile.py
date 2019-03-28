@@ -28,7 +28,7 @@ class EventProfile:
         return str(self.Attendence)
     
     def setName(self,name):
-        self.name = name
+        self.Name = name
         
     def setDate(self,Date = 0):
         self.Date = Date
