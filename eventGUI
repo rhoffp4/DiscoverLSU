@@ -1,0 +1,65 @@
+# Susan Borne
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(499, 486)
+        self.eventName = QtWidgets.QLabel(Form)
+        self.eventName.setGeometry(QtCore.QRect(41, 72, 71, 16))
+        self.eventName.setObjectName("eventName")
+        self.eventBox = QtWidgets.QLineEdit(Form)
+        self.eventBox.setGeometry(QtCore.QRect(131, 72, 231, 21))
+        self.eventBox.setObjectName("eventBox")
+        self.date = QtWidgets.QLabel(Form)
+        self.date.setGeometry(QtCore.QRect(40, 170, 60, 16))
+        self.date.setObjectName("date")
+        self.locationBox = QtWidgets.QLineEdit(Form)
+        self.locationBox.setGeometry(QtCore.QRect(131, 104, 231, 21))
+        self.locationBox.setObjectName("locationBox")
+        self.location = QtWidgets.QLabel(Form)
+        self.location.setGeometry(QtCore.QRect(41, 106, 53, 16))
+        self.location.setObjectName("location")
+        self.description = QtWidgets.QLabel(Form)
+        self.description.setGeometry(QtCore.QRect(41, 141, 70, 16))
+        self.description.setObjectName("description")
+        self.desciptBox = QtWidgets.QLineEdit(Form)
+        self.desciptBox.setGeometry(QtCore.QRect(131, 136, 231, 21))
+        self.desciptBox.setObjectName("desciptBox")
+        self.numStudent = QtWidgets.QLabel(Form)
+        self.numStudent.setGeometry(QtCore.QRect(40, 200, 221, 16))
+        self.numStudent.setObjectName("numStudent")
+        self.dateEdit = QtWidgets.QDateEdit(Form)
+        self.dateEdit.setGeometry(QtCore.QRect(130, 170, 110, 24))
+        self.dateEdit.setObjectName("dateEdit")
+        self.spinBox = QtWidgets.QSpinBox(Form)
+        self.spinBox.setGeometry(QtCore.QRect(330, 200, 48, 24))
+        self.spinBox.setObjectName("spinBox")
+        self.buttonBox = QtWidgets.QDialogButtonBox(Form)
+        self.buttonBox.setGeometry(QtCore.QRect(210, 260, 164, 32))
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.eventName.setText(_translate("Form", "Event name"))
+        self.date.setText(_translate("Form", "Date"))
+        self.location.setText(_translate("Form", "Location"))
+        self.description.setText(_translate("Form", "Description"))
+        self.numStudent.setText(_translate("Form", "Enter number of students attended:"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+
