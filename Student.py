@@ -1,3 +1,5 @@
+#Susan Borne
+
 class Student: #class name
     def __init__(self): #constructor method
         self.name = str("")
