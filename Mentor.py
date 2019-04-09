@@ -1,3 +1,4 @@
+#Samuel Okoye
 '''
 Faculty Class for Lsu Discover
 created by _____________(FIll IN LATER)
