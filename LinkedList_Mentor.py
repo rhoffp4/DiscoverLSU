@@ -1,3 +1,4 @@
+#Samuel Okoye
 from Mentor import Faculty
 class Node:
     def __init__(self,data):
