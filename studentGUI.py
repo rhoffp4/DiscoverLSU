@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(651, 504)
+        Form.resize(550, 510)
         self.addStudent = QtWidgets.QLabel(Form)
         self.addStudent.setGeometry(QtCore.QRect(180, 30, 121, 16))
         self.addStudent.setObjectName("addStudent")
