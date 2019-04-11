@@ -4,6 +4,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
+    def __init__(self):
+        self.collegeBox = QtWidgets.QComboBox(Form)
+        if (self.handleValueUpdated(self.collegeBox)):
+            self.collegeBox.valueUpdated.connect(self.handleValueUpdated)
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(550, 510)
@@ -22,10 +26,8 @@ class Ui_Form(object):
         self.studentEmailBox = QtWidgets.QLineEdit(Form)
         self.studentEmailBox.setGeometry(QtCore.QRect(174, 103, 131, 21))
         self.studentEmailBox.setObjectName("studentEmailBox")
-        self.collegeBox = QtWidgets.QComboBox(Form)
         self.collegeBox.setGeometry(QtCore.QRect(171, 132, 271, 26))
         self.collegeBox.setObjectName("collegeBox")
-        self.collegeBox.addItem("")
         self.collegeBox.addItem("")
         self.collegeBox.addItem("")
         self.collegeBox.addItem("")
@@ -41,9 +43,6 @@ class Ui_Form(object):
         self.college = QtWidgets.QLabel(Form)
         self.college.setGeometry(QtCore.QRect(31, 134, 46, 16))
         self.college.setObjectName("college")
-        self.majorBox = QtWidgets.QLineEdit(Form)
-        self.majorBox.setGeometry(QtCore.QRect(172, 164, 131, 21))
-        self.majorBox.setObjectName("majorBox")
         self.mentorLast = QtWidgets.QLabel(Form)
         self.mentorLast.setGeometry(QtCore.QRect(326, 246, 26, 16))
         self.mentorLast.setObjectName("mentorLast")
@@ -56,19 +55,20 @@ class Ui_Form(object):
         self.studentEmail = QtWidgets.QLabel(Form)
         self.studentEmail.setGeometry(QtCore.QRect(31, 103, 121, 16))
         self.studentEmail.setObjectName("studentEmail")
+        self.majorDropdown = QtWidgets.QComboBox(Form)
+        self.majorDropdown.setGeometry(QtCore.QRect(170, 160, 271, 26))
+        self.majorDropdown.setObjectName("majorDropdown")
+        self.majorDropdown.addItem("")
+        self.minorDropdown = QtWidgets.QComboBox(Form)
+        self.minorDropdown.setGeometry(QtCore.QRect(170, 190, 271, 26))
+        self.minorDropdown.setObjectName("minorDropdown")
+        self.minorDropdown.addItem("")
         self.majors = QtWidgets.QLabel(Form)
         self.majors.setGeometry(QtCore.QRect(31, 164, 51, 16))
         self.majors.setObjectName("majors")
-        self.majorBox2 = QtWidgets.QLineEdit(Form)
-        self.majorBox2.setGeometry(QtCore.QRect(325, 164, 121, 21))
-        self.majorBox2.setObjectName("majorBox2")
         self.minors = QtWidgets.QLabel(Form)
         self.minors.setGeometry(QtCore.QRect(31, 195, 51, 16))
         self.minors.setObjectName("minors")
-        self.minorBox1 = QtWidgets.QLineEdit(Form)
-        self.minorBox1.setGeometry(QtCore.QRect(172, 195, 131, 21))
-        self.minorBox1.setText("")
-        self.minorBox1.setObjectName("minorBox1")
         self.mentorEmail = QtWidgets.QLabel(Form)
         self.mentorEmail.setGeometry(QtCore.QRect(30, 270, 80, 16))
         self.mentorEmail.setObjectName("mentorEmail")
@@ -84,9 +84,6 @@ class Ui_Form(object):
         self.durp = QtWidgets.QLabel(Form)
         self.durp.setGeometry(QtCore.QRect(30, 393, 77, 16))
         self.durp.setObjectName("durp")
-        self.minorBox2 = QtWidgets.QLineEdit(Form)
-        self.minorBox2.setGeometry(QtCore.QRect(325, 195, 121, 21))
-        self.minorBox2.setObjectName("minorBox2")
         self.lsuEdu = QtWidgets.QLabel(Form)
         self.lsuEdu.setGeometry(QtCore.QRect(310, 110, 56, 16))
         self.lsuEdu.setObjectName("lsuEdu")
@@ -144,8 +141,8 @@ class Ui_Form(object):
         self.studentFirst.setText(_translate("Form", "First"))
         self.mentor.setText(_translate("Form", "Mentor"))
         self.studentEmail.setText(_translate("Form", "Username (Email)"))
-        self.majors.setText(_translate("Form", "Major(s)"))
-        self.minors.setText(_translate("Form", "Minor(s)"))
+        self.majors.setText(_translate("Form", "Major"))
+        self.minors.setText(_translate("Form", "Minor"))
         self.mentorEmail.setText(_translate("Form", "Mentor Email"))
         self.antiGradDate.setText(_translate("Form", "Anticipated Grad Date"))
         self.gradDate.setText(_translate("Form", "Graduation Date"))
@@ -169,10 +166,111 @@ class Ui_Form(object):
         self.collegeBox.setItemText(8, _translate("Form", "Manship School of Mass Communication"))
         self.collegeBox.setItemText(9, _translate("Form", "College of Music & Dramatic Arts"))
         self.collegeBox.setItemText(10, _translate("Form", "College of Science"))
-        self.collegeBox.setItemText(11, _translate("Form", "Ogden Honors College"))
-        self.collegeBox.setItemText(12, _translate("Form", "University College"))
+        self.collegeBox.setItemText(11, _translate("Form", "University College Center for Freshman Year"))
         self.college.setText(_translate("Form", "College"))
         self.entryLabel.setText(_translate("Form", "Entry Completed on"))
+        self.majorDropdown.setItemText(0, _translate("Form", "Select One:"))
+        self.minorDropdown.setItemText(0, _translate("Form", "Select One (if applicable):"))
+
+    def handleValueUpdated(self, value):
+        if (self.collegeBox.currentIndex() == 1):
+            self.majorDropdown.setItemText(0, translate("Agricultural Business, BS"))
+            self.majorDropdown.addItem("Agricultural & Extension Education, BS")
+            self.majorDropdown.addItem("Animal Sciences, BS")
+            self.majorDropdown.addItem("Environ Management Systems, BS")
+            self.majorDropdown.addItem("Nutrition & Food Sciences, BS")
+            self.majorDropdown.addItem("Natural Resource Ecl & Mgt, BS")
+            self.majorDropdown.addItem("Plant & Soil Systems, BS")
+            self.majorDropdown.addItem("Textiles/Apparel/Merchand, BS")
+
+        if (self.collegeBox.currentIndex() == 2):
+            self.majorDropdown.addItem("Interior Design")
+            self.majorDropdown.addItem("Landscape Architecture")
+            self.majorDropdown.addItem("Studio Art")
+
+        if (self.collegeBox.currentIndex() == 3):
+            self.majorDropdown.addItem("Accounting")
+            self.majorDropdown.addItem("Economics")
+            self.majorDropdown.addItem("Entrepreneurship")
+            self.majorDropdown.addItem("Finance")
+            self.majorDropdown.addItem("General Business")
+            self.majorDropdown.addItem("Info Systs and Decision Sci")
+            self.majorDropdown.addItem("International Trade & Finance")
+            self.majorDropdown.addItem("Management")
+            self.majorDropdown.addItem("Marketing")
+
+        if (self.collegeBox.currentIndex() == 4):
+            self.majorDropdown.addItem("Coastal Environmental Science")
+            self.majorDropdown.addItem("Applied Coastal Env Science")
+            self.majorDropdown.addItem("Coastal Metereorology")
+            self.majorDropdown.addItem("Environmental Health")
+            self.majorDropdown.addItem("Environmental Law")
+            self.majorDropdown.addItem("Environmental Sci & Research")
+
+        if (self.collegeBox.currentIndex() == 5):
+            self.majorDropdown.addItem("Biological Engineering")
+            self.majorDropdown.addItem("Construction Management")
+            self.majorDropdown.addItem("Civil Engineering")
+            self.majorDropdown.addItem("Chemical Engineering")
+            self.majorDropdown.addItem("Computer Science")
+            self.majorDropdown.addItem("Electrical Engineering")
+            self.majorDropdown.addItem("Computer Engineering")
+            self.majorDropdown.addItem("Environmental Engineering")
+            self.majorDropdown.addItem("Industrial Engineering")
+            self.majorDropdown.addItem("Mechanical Engineering")
+            self.majorDropdown.addItem("Petroleum Engineering")
+
+        if (self.collegeBox.currentIndex() == 6):
+            self.majorDropdown.addItem("Child and Family Studies")
+            self.majorDropdown.addItem("Dual Cert Gen/Spec Edu 1-5")
+            self.majorDropdown.addItem("Elem Grades Education")
+            self.majorDropdown.addItem("Kinesiology")
+            self.majorDropdown.addItem("Leadership and Human Resource Development")
+            self.majorDropdown.addItem("PK-3 Teacher Certification")
+            self.majorDropdown.addItem("Sport Administration")
+            self.majorDropdown.addItem("Social Work")
+
+        if (self.collegeBox.currentIndex() == 7):
+            self.majorDropdown.addItem("Anthropology")
+            self.majorDropdown.addItem("Communication Studies")
+            self.majorDropdown.addItem("Communication Disorders")
+            self.majorDropdown.addItem("Economics")
+            self.majorDropdown.addItem("English")
+            self.majorDropdown.addItem("French")
+            self.majorDropdown.addItem("Geography")
+            self.majorDropdown.addItem("History")
+            self.majorDropdown.addItem("International Studies")
+            self.majorDropdown.addItem("Interdisciplinary Studies")
+            self.majorDropdown.addItem("Liberal Arts")
+            self.majorDropdown.addItem("Philosophy")
+            self.majorDropdown.addItem("Political Science")
+            self.majorDropdown.addItem("Psychology")
+            self.majorDropdown.addItem("Screen Arts")
+            self.majorDropdown.addItem("Sociology")
+            self.majorDropdown.addItem("Spanish")
+
+        if (self.collegeBox.currentIndex() == 8):
+            self.majorDropdown.addItem("Mass Communication")
+
+        if (self.collegeBox.currentIndex() == 9):
+            self.majorDropdown.addItem("Music, BS")
+            self.majorDropdown.addItem("Music Education")
+            self.majorDropdown.addItem("Music, BM")
+            self.majorDropdown.addItem("Theatre")
+
+        if (self.collegeBox.currentIndex() == 10):
+            self.majorDropdown.addItem("Biochemistry")
+            self.majorDropdown.addItem("Biological Sciences")
+            self.majorDropdown.addItem("Chemistry")
+            self.majorDropdown.addItem("Geology-Professional")
+            self.majorDropdown.addItem("Mathematics")
+            self.majorDropdown.addItem("Microbiology")
+            self.majorDropdown.addItem("Physics")
+
+        if (self.collegeBox.currentIndex() == 11):
+            self.majorDropdown.addItem("Undecided - Arts & Humanities")
+            self.majorDropdown.addItem("Undecided - Sci & Engineering")
+            self.majorDropdown.addItem("Undecided - Social Sciences")
 
 
 if __name__ == "__main__":
