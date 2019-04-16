@@ -115,10 +115,10 @@ class Faculty:      #class name
             returnstring += ("EMPTY\n")
 
         if self.department is not None:
-            returnstring += (self.department + "\n")
+            returnstring += (self.department )
 
         else:
-            returnstring += ("EMPTY\n")
+            returnstring += ("EMPTY")
 
         return str(returnstring)
 
@@ -136,6 +136,7 @@ def __main__():
     alex.setcollege("Engineering")
     alex.setdepartment("Computer Science")
     print(alex.tostring)
+    print("\nEmpty Space\n)
     pujan = Faculty()
     print(pujan.tostring)
 
