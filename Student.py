@@ -1,6 +1,6 @@
 #Susan Borne
 
-Mentor import Faculty
+from Mentor import Faculty
 from EventProfile import EventProfile
 '''
 Student class for lSU Discover Application
@@ -88,7 +88,7 @@ class Student: #class name
         if self.activity is not None:
             if isinstance(name,str):
                 for activity in self.activity:
-                    if activity.getName().upper() == name.upper():
+                    if activity.getname().upper() == name.upper():
                         flag = True
                         return activity
             else:
@@ -141,55 +141,89 @@ class Student: #class name
 
     def tostring(self):
         returnstring = ""
-        returnstring += self.getname() + "\n"
-        returnstring += self.getemail() + "\n"
-        returnstring += self.getmajor() + "\n"
-        returnstring += self.getminor() + "\n"
+        print("inside tostring")
+        if self.name is not None:
+            returnstring += self.name + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        if self.email is not None:
+            returnstring += self.email + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        if self.major is not None:
+            returnstring += self.major + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        if self.minor is not None:
+            returnstring += self.minor + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        returnstring += str(len(self.mentor)) + "\n"
+        if len(self.mentor) > 0:
+            for each in self.mentor:
+                returnstring += each.getname() + "\n"
+
+        if self.maybeGradDate is not None:
+            returnstring += self.getmaybegraddate() + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        if self.actualGradDate is not None:
+            returnstring += self.actualGradDate + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        if self.durp is not None:
+            returnstring += self.durp + "\n"
+        else:
+            returnstring += "EMPTY\n"
+        returnstring += str(len(self.activity)) + "\n"
         count = 0
-        for mentor in self.mentor:
-            count += 1
-        returnstring += str(count) + "\n"
-        for mentor in self.mentor:
-            returnstring += mentor.getname() + "\n"
-        returnstring += self.getmaybegraddate() + "\n"
-        returnstring += self.getactualgraddate() + "\n"
-        returnstring += self.getdurp() + "\n"
-        count = 0
-        for activity in self.activity:
-            count += 1
-        returnstring += str(count) + "\n"
-        for activity in self.activity:
-            if count == len(self.activity):
-                returnstring += activity.getName()
-            else:
-                returnstring += activity.getName() + "\n"
+        if len(self.activity) > 0:
+            for each in self.activity:
+                count += 1
+                if count == len(self.activity):
+                    returnstring += each.getname()
+                else:
+                    returnstring += each.getname() + "\n"
+        return returnstring
+
 
 
 
 def __main__():
     Alex = Student()
     Alex.setname("Alex Mensen-Johnson")
+    print(Alex.getname())
     Alex.setemail("amense1@lsu.edu")
+    print(Alex.getemail())
     Alex.setmajor("ComputerScience")
+    print(Alex.getmajor())
     Alex.setminor("Business")
+    print(Alex.getminor())
     Pujan = Faculty()
     Pujan.setname("Pujan Shrestha")
     Peter = Faculty()
     Peter.setname("Peter Wolenski")
     Alex.addmentor(Pujan)
     Alex.addmentor(Peter)
-    Alex.addmentor()
+    list = Alex.getmentors()
+    for mentor in list:
+        print(mentor.getname())
     Alex.setmaybegraddate("05/05/2020")
+    print(Alex.getmaybegraddate())
     Alex.setactualgraddate("05/05/2020")
+    print(Alex.getactualgraddate())
     Alex.setdurp("durp")
-    Almighy = EventProfile()
+    print(Alex.getdurp())
+    Almighty = EventProfile()
     ICC = EventProfile()
-    Alex.addactivity(Almighy)
+    Almighty.setName("Almighty")
+    ICC.setName("ICC")
+    Alex.addactivity(Almighty)
     Alex.addactivity(ICC)
     MentorClone = Alex.findmentor("Peter Wolenski")
     print(MentorClone.getname())
-    EventClone = Alex.findactivity()
-    print(EventClone.getName())
+    EventClone = Alex.findactivity("ICC")
+    print(EventClone.getname())
     print(type(Alex))
     print(Alex.tostring())
 
