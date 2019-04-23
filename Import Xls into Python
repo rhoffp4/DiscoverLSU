@@ -19,3 +19,14 @@ browseButton_Excel = tk.Button(text='Import Excel File', command=getExcel, bg='g
 canvas1.create_window(150, 150, window=browseButton_Excel)
 
 root.mainloop()
+
+
+#Writing Dataframe intp excel sheet
+class pandas.ExcelWriter(path, engine=None, date_format=None, datetime_format=None, mode='w', **engine_kwargs)
+with ExcelWriter('path_to_file.xlsx') as writer:
+...     df1.to_excel(writer, sheet_name='Sheet1')
+...     df2.to_excel(writer, sheet_name='Sheet2')
+
+#This is useful for appending an exiting excel file
+with ExcelWriter('path_to_file.xlsx', mode='a') as writer:
+...     df.to_excel(writer, sheet_name='Sheet3')
