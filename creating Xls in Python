@@ -1,0 +1,81 @@
+import xlsxwriter
+
+workbook  = xlsxwriter.Workbook('MentorProfile.xlsx')
+worksheet = workbook.add_worksheet()
+
+worksheet.write(0, 0, 'Hello Excel')
+
+
+workbook = xlsxwriter.Workbook(MentorProfile, {'constant_memory': True})
+workbook = xlsxwriter.Workbook(MentorProfile, {'strings_to_numbers': True})
+workbook = xlsxwriter.Workbook(MentorProfile, {'remove_timezone': True})
+worksheet1 = workbook.add_worksheet()           # Sheet1
+worksheet2 = workbook.add_worksheet()
+worksheet3 = workbook.add_worksheet() 
+worksheet4 = workbook.add_worksheet()
+format1 = workbook.add_format(props)  # Set properties at creation.
+chart = workbook.add_chart({'type': 'column'})
+chart = workbook.add_chart({'type': 'pie'})
+chart = workbook.add_chart({'type': 'bar'})
+workbook.set_tab_ratio(60)
+
+workbook.close()
+
+for worksheet in workbook.worksheets():
+    worksheet.write('A1', 'Hello')
+    worksheet = workbook.get_worksheet_by_name('Sheet1')
+    
+    from xlsxwriter.workbook import Workbook
+from xlsxwriter.worksheet import Worksheet
+from xlsxwriter.worksheet import convert_cell_args
+from xlsxwriter.compatibility import str_types
+
+
+class MyWorksheet(Worksheet):
+    """
+    Subclass of the XlsxWriter Worksheet class to override the default
+    write() method.
+
+    """
+
+    @convert_cell_args
+    def write(self, row, col, *args):
+
+        data = args[0]
+
+        # Reverse strings to demonstrate the overridden method.
+        if isinstance(data, str_types):
+            data = data[::-1]
+            return self.write_string(row, col, data)
+        else:
+            # Call the parent version of write() as usual for other data.
+            return super(MyWorksheet, self).write(row, col, *args)
+
+
+class MyWorkbook(Workbook):
+    """
+    Subclass of the XlsxWriter Workbook class to override the default
+    Worksheet class with our custom class.
+
+    """
+
+    def add_worksheet(self, name=None):
+        # Overwrite add_worksheet() to create a MyWorksheet object.
+        worksheet = super(MyWorkbook, self).add_worksheet(name, MyWorksheet)
+
+        return worksheet
+
+
+# Create a new MyWorkbook object.
+workbook = MyWorkbook('inheritance1.xlsx')
+
+# The code from now on will be the same as a normal "Workbook" program.
+worksheet = workbook.add_worksheet()
+
+# Write some data to test the subclassing.
+worksheet.write('A1', 'Hello')
+worksheet.write('A2', 'World')
+worksheet.write('A3', 123)
+worksheet.write('A4', 345)
+
+workbook.close()
