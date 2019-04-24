@@ -1,0 +1,22 @@
+import xlsxwriter
+
+workbook  = xlsxwriter.Workbook('MentorProfile.xlsx')
+worksheet = workbook.add_worksheet()
+
+worksheet.write(0, 0, 'Hello Excel')
+
+
+workbook = xlsxwriter.Workbook(MentorProfile, {'constant_memory': True})
+workbook = xlsxwriter.Workbook(MentorProfile, {'strings_to_numbers': True})
+workbook = xlsxwriter.Workbook(MentorProfile, {'remove_timezone': True})
+worksheet1 = workbook.add_worksheet()           # Sheet1
+worksheet2 = workbook.add_worksheet()
+worksheet3 = workbook.add_worksheet() 
+worksheet4 = workbook.add_worksheet()
+format1 = workbook.add_format(props)  # Set properties at creation.
+chart = workbook.add_chart({'type': 'column'})
+chart = workbook.add_chart({'type': 'pie'})
+chart = workbook.add_chart({'type': 'bar'})
+workbook.set_tab_ratio(60)
+
+workbook.close()
